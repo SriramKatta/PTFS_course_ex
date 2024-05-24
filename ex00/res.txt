@@ -1,0 +1,15 @@
+first question
+double version time and value
+Walltime: 1.255155 s
+value of PI 3.1415926535894929116921048262157 
+
+third question
+float version time and value
+Walltime: 0.003207 s
+value of PI 3.1415929794311523437500000000000 
+
+fourth question
+double version time and value with performance mode
+Walltime: 0.860374 s
+value of PI 3.1415926535894929116921048262157 
+

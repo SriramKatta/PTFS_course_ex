@@ -1,0 +1,19 @@
+=== JOB_STATISTICS ===
+=== current date     : Mon May  6 14:47:13 CEST 2024
+= Job-ID             : 1280586 on fritz
+= Job-Name           : TEST01
+= Job-Command        : /home/hpc/ptfs/ptfs263h/ptfs/ass0/job.sh
+= Initial workdir    : /home/hpc/ptfs/ptfs263h/ptfs/ass0
+= Queue/Partition    : singlenode
+= Slurm account      : ptfs with QOS=ptfs
+= Requested resources:  for 00:30:00
+= Elapsed runtime    : 00:00:10
+= Total RAM usage    : 0.0 GiB 
+= Node list          : f0460
+= Subm/Elig/Start/End: 2024-05-06T14:46:53 / 2024-05-06T14:46:53 / 2024-05-06T14:47:03 / 2024-05-06T14:47:13
+======================
+=== Quota infos ======
+    Path              Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc         1892.5M   104.9G   209.7G        N/A   4,555      500K   1,000K        N/A    
+    /lustre              4.0K     0.0K     0.0K        N/A       1       80K     250K        N/A    
+======================
