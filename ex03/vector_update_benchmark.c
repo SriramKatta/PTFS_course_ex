@@ -10,15 +10,16 @@ int main(int argc, char **argv)
   unsigned int k, i, NITER;
   unsigned int stride;
   const unsigned int N = 1e8;
+  const unsigned int limit = 1e6;
 
   if (argc != 2)
   {
     printf("Usage: %s <stride>\n", argv[0]);
     exit(1);
   }
-  stride = atoi(argv[1]);
+  stride = atol(argv[1]);
 
-  if (stride >= 1e6)
+  if (stride >= limit)
   {
     return 0;
   }
@@ -27,10 +28,10 @@ int main(int argc, char **argv)
 
   for (k = 0; k < N; ++k)
   {
-    a[k] = 0.0;
+    a[k] = (double)RAND_MAX/rand();
   }
 
-  const double s = 1.00000000001;
+  const double s = (double)RAND_MAX/rand();
 
   NITER = 1;
   do
@@ -53,9 +54,12 @@ int main(int argc, char **argv)
     wct_end = getTimeStamp();
     NITER = NITER * 2;
   } while (wct_end - wct_start < 0.1);
-  double updatespersec = (( N / stride ) * NITER ) / ((wct_end - wct_start) * 1000000);
   NITER = NITER / 2;
-  printf("%d %lf\n", stride, updatespersec);
+
+  double updatespersec = (( N / stride ) * NITER ) / ((wct_end - wct_start) * 1000000);
+  
+  printf("%u %lf\n", stride, updatespersec);
+  
   free(a);
 
   return 0;

@@ -5,9 +5,9 @@ set output opfname
 set title title_str
 
 set grid
-#set logscale x
-set xlabel "N"
-set ylabel "s"
+set logscale x
+set xlabel "stride"
+set ylabel "array updates per second"
 
 plot 'stride-dat' title "stride access" with linespoints,
 

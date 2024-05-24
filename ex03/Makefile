@@ -1,5 +1,5 @@
 CC:=icx
-%CFLAGS:=-O3 -xHost -fno-alias 
+CFLAGS:=-O3 -xHost -fno-alias 
 
 SRCS:=$(sort $(wildcard *.c))
 HEADER:=$(wildcard *.h)
