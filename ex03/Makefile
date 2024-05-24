@@ -4,12 +4,12 @@ CFLAGS:=-O3 -xHost -fno-alias
 SRCS:=$(sort $(wildcard *.c))
 HEADER:=$(wildcard *.h)
 OBJS=$(SRCS:.c=.o)
-TARGETS:=$(subst .c,,$(lastword $(SRCS)))
+TARGETS:=$(subst .c, , $(lastword $(SRCS))) 
 
 all:$(TARGETS)
 
 $(TARGETS):$(OBJS)
-	$(CC) $(var) $(wordlist 1, 2, $(CFLAGS)) -o $(word 1, $(TARGETS)) $(OBJS)
+	$(CC) $(var) $(wordlist 1, 2, $(CFLAGS)) -o $(word 1, $(TARGETS))_exe $(OBJS)
 	@echo "building exe file done"
 
 $(OBJS):$(SRCS) $(HEADER)
