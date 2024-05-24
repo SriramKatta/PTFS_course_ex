@@ -1,5 +1,5 @@
 CC:=icx
-CFLAGS:=-O3 -xHost -fno-alias 
+%CFLAGS:=-O3 -xHost -fno-alias 
 
 SRCS:=$(sort $(wildcard *.c))
 HEADER:=$(wildcard *.h)
@@ -18,7 +18,7 @@ $(OBJS):$(SRCS) $(HEADER)
 	@echo "building obj file done"
 
 cleanaux:
-	@rm *.png* *-dat *.o*
+	@rm *.png* *-dat* *.o*
 
 clean:
-	@rm -rf *.o *.gch $(TARGETS)
+	@rm -rf *.o* *.gch vector_update_benchmark_exe
