@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
   for (k = 0; k < N; ++k)
   {
-    a[k] = 0.0;//(double)RAND_MAX/rand();
+    a[k] = (double)RAND_MAX/rand();
   }
 
   const double s = (double)RAND_MAX/rand();

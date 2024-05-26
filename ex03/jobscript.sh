@@ -20,7 +20,7 @@ do
 
 done
 
-for ((i=0; i <= 70; i+=2));
+for ((i=0; i <= 70; i+=1));
 do
   echo "$(echo 8*1.2^$i | bc)"
   srun --cpu-freq=2400000-2400000 \
