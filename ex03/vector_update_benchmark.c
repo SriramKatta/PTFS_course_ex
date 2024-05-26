@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
   for (k = 0; k < N; ++k)
   {
-    a[k] = (double)RAND_MAX/rand();
+    a[k] = 0.0;//(double)RAND_MAX/rand();
   }
 
   const double s = (double)RAND_MAX/rand();
@@ -47,16 +47,17 @@ int main(int argc, char **argv)
       {
         a[i] = s * a[i];
       }
-      // end of benchmark loop
-      if (a[N / 2] < 0.)
-        printf("%lf", a[N / 2]); // prevent compiler from eliminating loop
     }
     wct_end = getTimeStamp();
+    // end of benchmark loop
+    if (a[N / 2] < 0.)
+      printf("%lf", a[N / 2]); // prevent compiler from eliminating loop
+
     NITER = NITER * 2;
   } while (wct_end - wct_start < 0.1);
   NITER = NITER / 2;
 
-  double updatespersec = (( N / stride ) * NITER ) / ((wct_end - wct_start) * 1000000);
+  double updatespersec = (( (N / stride ) + 1) * NITER ) / ((wct_end - wct_start)*1000000);
   
   printf("%u %lf\n", stride, updatespersec);
   
