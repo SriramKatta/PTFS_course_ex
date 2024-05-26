@@ -7,7 +7,7 @@ set title title_str
 set grid
 set logscale x
 set xlabel "stride"
-set ylabel "array updates per second"
+set ylabel "million array updates per second"
 
 plot 'stride-dat' title "stride access" with linespoints,
 

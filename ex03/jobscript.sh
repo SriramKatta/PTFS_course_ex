@@ -30,6 +30,6 @@ done
 
 make clean
 
-gnuplot -e "title_str='loop performance in updates/s' \
+gnuplot -e "title_str='loop performance in millionupdates/s' \
             ;opfname='plot_stride.png'" \
             plotjob.sh

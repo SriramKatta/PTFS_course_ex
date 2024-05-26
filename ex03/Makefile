@@ -9,7 +9,8 @@ TARGETS:=$(subst .c, , $(lastword $(SRCS)))
 all:$(TARGETS)
 
 $(TARGETS):$(OBJS)
-	$(CC) $(var) $(wordlist 1, 2, $(CFLAGS)) -o $(word 1, $(TARGETS))_exe $(OBJS)
+	$(CC) $(var) $(wordlist 1, 2, $(CFLAGS))\
+			 -o $(word 1, $(TARGETS))_exe $(OBJS)
 	@echo "building exe file done"
 
 $(OBJS):$(SRCS) $(HEADER)
