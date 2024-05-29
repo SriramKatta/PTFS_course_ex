@@ -57,10 +57,10 @@ int main(int argc, char **argv)
   } while (wct_end - wct_start < 0.1);
   NITER = NITER / 2;
 
-  double updatespersec = (( (N / stride ) + 1) * NITER )\
+  double MFLOPSpersec = (( (N / stride ) + 1) * NITER )\
      / ((wct_end - wct_start)*1000000);
   
-  printf("%u %lf\n", stride, updatespersec);
+  printf("%u %lf\n", stride, MFLOPSpersec);
   
   free(a);
 

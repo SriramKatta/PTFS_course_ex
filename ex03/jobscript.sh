@@ -10,8 +10,8 @@ module load intel
 
 make
 
-echo "#stride updatedpersec\n" > ./stride8_1_2pow-dat
-echo "#stride updatedpersec\n" > ./stride2pow-dat
+echo "#stride Mflops/sec\n" > ./stride8_1_2pow-dat
+echo "#stride Mflops/sec\n" > ./stride2pow-dat
 
 for ((i=0; i <= 20; i+=1));
 do 
