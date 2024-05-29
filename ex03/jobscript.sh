@@ -10,13 +10,15 @@ module load intel
 
 make
 
-echo "#stride updatedpersec\n" > ./stride-dat
+echo "#stride updatedpersec\n" > ./stride8_1_2pow-dat
+echo "#stride updatedpersec\n" > ./stride2pow-dat
 
-for i in 1 2 4
+for ((i=0; i <= 20; i+=1));
 do 
+  echo "$(echo 2^$i | bc)"
   srun --cpu-freq=2400000-2400000 \
           ./vector_update_benchmark_exe \
-          $i >> ./stride-dat
+          $(echo 2^$i | bc) >> ./stride2pow-dat
 
 done
 
@@ -25,11 +27,9 @@ do
   echo "$(echo 8*1.2^$i | bc)"
   srun --cpu-freq=2400000-2400000 \
           ./vector_update_benchmark_exe \
-          $(echo 8*1.2^$i | bc) >> ./stride-dat
+          $(echo 8*1.2^$i | bc) >> ./stride8_1_2pow-dat
 done
 
 make clean
 
-gnuplot -e "title_str='loop performance in millionupdates/s' \
-            ;opfname='plot_stride.png'" \
-            plotjob.sh
+gnuplot plotjob.sh

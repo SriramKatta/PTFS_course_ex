@@ -1,13 +1,14 @@
 #!/usr/bin/gnuplot
 
 set terminal png
-set output opfname
-set title title_str
+set output "stride_performance.png"
+set title "loop performance in millionupdates/sec v/s stride"
 
 set grid
 set logscale x
 set xlabel "stride"
-set ylabel "million array updates per second"
+set ylabel "million array updates/sec"
 
-plot 'stride-dat' title "stride access" with linespoints,
+plot 'stride2pow-dat' title "2^n Stride" with linespoints, \
+    'stride8_1_2pow-dat' title "8*1.2^n stride" with linespoints
 
