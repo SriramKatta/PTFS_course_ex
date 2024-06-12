@@ -2,3 +2,5 @@
 *.gch
 *_exe
 *-dat
+!simdata
+*exe/
