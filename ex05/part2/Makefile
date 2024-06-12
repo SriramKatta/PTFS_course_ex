@@ -1,5 +1,5 @@
 CC:=icx
-CFLAGS:=-xHost -fno-alias
+CFLAGS:=-O3 -xHost -fno-alias -qopenmp
 
 
 SRCS:=$(sort $(wildcard *.c))
@@ -10,11 +10,11 @@ TARGETS:=$(subst .c,,$(firstword $(SRCS)))
 all:$(TARGETS)
 
 $(TARGETS):$(OBJS)
-	$(CC) $(firstword $(CFLAGS)) -qopenmp -o $(word 1, $(TARGETS))	$(word 1, $(OBJS)) $(lastword $(OBJS))
+	$(CC) $(CFLAGS) -o $(word 1, $(TARGETS))	$(word 1, $(OBJS)) $(lastword $(OBJS))
 	@echo "building exe file done"
 
 $(OBJS):$(SRCS) $(HEADER)
-	$(CC)  $(wordlist 1, 2, $(CFLAGS)) -qopenmp -c $(word 1, $(SRCS)) $(lastword $(SRCS)) $(HEADER)
+	$(CC)  $(CFLAGS) -c $(word 1, $(SRCS)) $(lastword $(SRCS)) $(HEADER)
 	@echo "building obj file done"
 
 cleanaux:
