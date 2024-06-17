@@ -2,6 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH -p singlenode
 #SBATCH --time=02:30:00
+#SBATCH --ntasks-per-node=1
 #SBATCH --job-name=ompbasics2
 #SBATCH --export=NONE
 
