@@ -1,4 +1,4 @@
-C:=nvcc
+CXX:=nvc++
 
 SRCS:=benchmark.cu
 TARGET:=benchmark
@@ -6,4 +6,4 @@ TARGET:=benchmark
 all : $(TARGET)
 
 $(TARGET) : $(SRCS)
-	$(C) -o ./exe/$(TARGET) $(SRCS)
+	$(CXX) -O3 -o ./exe/$(TARGET) $(SRCS)

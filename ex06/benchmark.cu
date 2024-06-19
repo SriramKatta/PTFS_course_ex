@@ -81,7 +81,7 @@ auto endDtoH = Time::now();
   std::cout<< kerneltime << " " << (arraydatasizeinGbytes * 2 * rep) / kerneltime << std::endl
            << Dtohtime << " " << arraydatasizeinGbytes / Dtohtime << std::endl
            << HtoDtime << " " << arraydatasizeinGbytes / HtoDtime << std::endl;
-  cudaFree(h_a);
+  cudaFreeHost(h_a);
   cudaFree(d_a);
   return 0;
 }
