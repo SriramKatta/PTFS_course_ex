@@ -70,31 +70,3 @@ echo "--------------------------------------------------------------"
 
 
 gnuplot 6cgpuplot.sh
-
-
-
-
-
-#kerneltime=$(echo $tottime | awk '{print $1}')
-#DHtime=$(echo $tottime | awk '{print $3}')
-#HDtime=$(echo $tottime | awk '{print $5}')
-#echo "$i $kerneltime" >> ./simdata/kernaltime_threadvar-dat
-#echo "$i $DHtime" >> ./simdata/dtohtime_threadvar-dat
-#echo "$i $HDtime" >> ./simdata/htodtime_threadvar-dat
-#DHbandwidth=$(echo $tottime | awk '{print $4}')
-#HDbandwidth=$(echo $tottime | awk '{print $6}')
-#echo "$i $DHbandwidth" >> ./simdata/dtohBW_threadvar-dat
-#echo "$i $HDbandwidth" >> ./simdata/htodBW_threadvar-dat
-#kerneltime=$(echo $tottime | awk '{print $1}')
-#DHtime=$(echo $tottime | awk '{print $3}')
-#HDtime=$(echo $tottime | awk '{print $5}')
-#echo "$numelem $kerneltime" >> ./simdata/kernaltime_sizevar-dat
-#echo "$numelem $DHtime" >> ./simdata/dtohtime_sizevar-dat
-#echo "$numelem $HDtime" >> ./simdata/htodtime_sizevar-dat
-#DHbandwidth=$(echo $tottime | awk '{print $4}')
-#echo "$numelem $DHbandwidth" >> ./simdata/dtohBW_sizevar-dat
-
-#echo "#Numelements kerneltime(sec)" > ./simdata/kernaltime_sizevar-dat
-#echo "#Numelements HtoDtime(sec)" > ./simdata/htodtime_sizevar-dat
-#echo "#Numelements DtoHtime(sec)" > ./simdata/dtohtime_sizevar-dat
-#echo "#Numelements DtoHbandwidth(GB/s)" > ./simdata/dtohBW_sizevar-dat

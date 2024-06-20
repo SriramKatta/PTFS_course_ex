@@ -10,7 +10,7 @@ __global__
 void kernel(size_t N, double* a){
   int start = threadIdx.x + blockDim.x * blockIdx.x ;
   int stride = blockDim.x * gridDim.x;
-  for (size_t i = start; i < N; i+=stride)
+  for (size_t i = start; i <= N; i+=stride)
   {
     a[i] = a[i] + 1.0;
   }
