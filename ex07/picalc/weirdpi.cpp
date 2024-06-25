@@ -22,12 +22,12 @@ int main(int argc, char const *argv[])
 
   auto start = Time::now();
 #if privateactive
-  //std::cout << "private activated" << std::endl;
+  std::cout << "private activated" << std::endl;
   #pragma omp parallel for reduction(+:sum) private(x)
 #endif
 #if privatedeactive
-  //std::cout << "private deactivated" << std::endl;
-  #pragma omp parallel for reduction(+:sum) private(x)
+  std::cout << "private deactivated" << std::endl;
+  #pragma omp parallel for reduction(+:sum)
 #endif
   for(int i=0; i<N; i++) {
      x = (i + 0.5) * delta_x;

@@ -11,9 +11,8 @@ unset SLURM_EXPORT_ENV
 module load intel
 module load likwid
 
-mkdir simdata
-
-frqinkhz=2000000
+[ ! -d "exe" ] && mkdir -p exe
+[ ! -d "simdata" ] && mkdir -p simdata
 
 for varstate in privateactive privatedeactive
 do
@@ -23,12 +22,14 @@ do
     for threads in {1..4}
     do
       fname=./simdata/sim_${version}_${threads}_${varstate}
-      touch $fname
+      echo "#PI value performance" >  $fname
       echo "version ${version} num threads ${threads}"
       for intrun in {1..10}
       do
-        srun --cpu-freq=2000000-2000000 likwid-pin -q -C S0:0-$(($threads - 1)) ./exe/picalc$version >> $fname
+        srun --cpu-freq=2000000-2000000 likwid-pin -q -C S0:0-$(($threads - 1)) ./exe/picalc$version | tail -n 1 >> $fname
       done
     done
   done
 done
+
+gnuplot 6plot.gnu

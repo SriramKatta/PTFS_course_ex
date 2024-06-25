@@ -13,7 +13,7 @@ all: picalc raytracer
 
 picalc: picalca picalcb
 
-raytracer: raytrace_c raytrace_c_seq
+raytracer: raytracer_c_par raytracer_c_seq
 
 picalca:
 	@$(CXX) $(CXXFLAGS1) $(extraflag) -o  ./exe/picalca $(SRCSCXX)
@@ -23,11 +23,11 @@ picalcb:
 	@$(CXX) $(CXXFLAGS2) $(extraflag) -o ./exe/picalcb $(SRCSCXX)
 	@echo "building picalcb exe file done"
 
-raytrace_c:
+raytracer_c_par:
 	@$(CC) $(CFALGS) -qopenmp -o ./exe/raytracer_par $(SRCSC)
 	@echo "building raytrace_c_par exe file done"
 
-raytrace_c_seq:
+raytracer_c_seq:
 	@$(CC) $(CFALGS) -o ./exe/raytracer_seq $(SRCSC)
 	@echo "building raytrace_c_seq exe file done"
 
