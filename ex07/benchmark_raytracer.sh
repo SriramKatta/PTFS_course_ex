@@ -32,7 +32,7 @@ do
   echo "----------------------------------"
   for threads in 1 {2..72..2}
   do
-    paratime=$(OMP_SCHEDULE=$ompmode srun --cpu-freq=2400000-2400000 likwid-pin -q -C 0-$(($threads - 1)) ./exe/raytracer_par $imagesize $tilesize 2>&1 | tail -n 1 | awk '{print $2}') 
+    paratime=$(OMP_SCHEDULE=$ompmode OMP_NUM_THREADS=$threads OMP_PLACES=cores OMP_PROC_BIND=close srun --cpu-freq=2400000-2400000 ./exe/raytracer_par $imagesize $tilesize 2>&1 | tail -n 1 | awk '{print $2}') 
     performance=$(echo "$imagesize ^ 2 / ($paratime * 10^6)" | bc -l)
     echo "$threads $performance " >> $fname
     echo "$threads of 72 perform : $performance"

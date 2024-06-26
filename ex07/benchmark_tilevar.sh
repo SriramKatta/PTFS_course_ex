@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --nodes=1
+#SBATCH --nodes=1 -C hwperf
 #SBATCH -p singlenode
 #SBATCH --time=00:45:00
 #SBATCH --ntasks-per-node=1
@@ -25,18 +25,14 @@ do
   echo "----------------------------------"
   echo $ompmode
   echo "----------------------------------"
-  for ((tilesize=1; tilesize <= 5000; tilesize+=1))
+  for tilesize in 1 2 3 4 5 6 8 10 12 15 20 24 25 30 40 50 60 75 100 120 125 150 200 250 300 375 500 600 625 750 1000
   do
-    if [ $(echo "$imagesize % $tilesize == 0" | bc) -eq 1 ]
-    then
-      paratime=$(OMP_SCHEDULE=$ompmode srun --cpu-freq=2400000-2400000 likwid-pin -q -C 0-71 ./exe/raytracer_par $imagesize $tilesize 2>&1 | tail -n 1 | awk '{print $2}') 
-      performance=$(echo "$imagesize ^ 2 / ($paratime * 10^6)" | bc -l)
-      echo "$tilesize $performance " >> $fname
-      echo "$tilesize of 5000 : performance = $performance"
-    fi
+    paratime=$(OMP_SCHEDULE=$ompmode OMP_NUM_THREADS=72 OMP_PLACES=cores OMP_PROC_BIND=close srun --cpu-freq=2400000-2400000 ./exe/raytracer_par $imagesize $tilesize 2>&1 | tail -n 1 | awk '{print $2}' ) 
+    performance=$(echo "$imagesize ^ 2 / ($paratime * 10^6)" | bc -l)
+    echo "$tilesize $performance " >> $fname
+    echo "$tilesize of 1000 : performance = $performance"
   done
 done
 
 gnuplot tilesizeplot.sh
 
-    

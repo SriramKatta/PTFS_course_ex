@@ -13,6 +13,4 @@ set xtics rotate by 90 right
 
 
 plot './simdata/raytra_static' title "OMP schedule static" with linespoints, \
-      './simdata/raytra_dynamic' title "OMP schedule dynamic" with linespoints, \
-      './simdata/raytra_guided' title "OMP schedule guided" with linespoints, \
-      './simdata/raytra_auto' title "OMP schedule auto" with linespoints, \
+      './simdata/raytra_dynamic' title "OMP schedule dynamic" with linespoints

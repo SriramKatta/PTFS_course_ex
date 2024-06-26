@@ -2,7 +2,7 @@
 
 set terminal png
 set output "perf6b_tilesizevar.png"
-set title "MPX/s vs numthreads"
+set title "MPX/s vs tilesize"
 set key bottom right
 
 set grid

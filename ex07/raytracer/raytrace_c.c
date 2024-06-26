@@ -155,7 +155,7 @@ int main(int argc, char **argv)
       fprintf(stderr, "Could not allocate tile memory!\n");
       exit(1);
     }
-#pragma omp for private(xc, i) collapse(2) schedule(runtime)
+#pragma omp for private(xc, i) schedule(runtime) collapse(2) 
     for (yc = 0; yc < xtiles; yc++)
       for (xc = 0; xc < ytiles; xc++)
       {
@@ -184,7 +184,6 @@ int main(int argc, char **argv)
     fputc(picture[count], fd);
   fclose(fd);
 
-  free(tile);
   free(picture);
   exit(0);
 }
