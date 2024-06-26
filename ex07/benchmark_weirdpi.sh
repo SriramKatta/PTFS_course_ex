@@ -12,7 +12,7 @@ module load intel
 module load likwid
 
 [ ! -d "exe" ] && mkdir -p exe
-[ ! -d "simdata" ] && mkdir -p simdata/picalc
+[ ! -d "simdata/picalc" ] && mkdir -p simdata/picalc
 
 for varstate in privateactive privatedeactive
 do

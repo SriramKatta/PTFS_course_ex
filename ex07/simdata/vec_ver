@@ -10,21 +10,21 @@ Group 1: DATA
 +-----------------------------+---------+-------------+
 |            Event            | Counter |  HWThread 0 |
 +-----------------------------+---------+-------------+
-|      INSTR_RETIRED_ANY      |  FIXC0  |  3752158742 |
-|    CPU_CLK_UNHALTED_CORE    |  FIXC1  |  3003514017 |
-|     CPU_CLK_UNHALTED_REF    |  FIXC2  |  3604307808 |
-|        TOPDOWN_SLOTS        |  FIXC3  | 15017570085 |
-|  MEM_INST_RETIRED_ALL_LOADS |   PMC0  |      469714 |
-| MEM_INST_RETIRED_ALL_STORES |   PMC1  |      173144 |
+|      INSTR_RETIRED_ANY      |  FIXC0  |  3752149890 |
+|    CPU_CLK_UNHALTED_CORE    |  FIXC1  |  3003438689 |
+|     CPU_CLK_UNHALTED_REF    |  FIXC2  |  3604326912 |
+|        TOPDOWN_SLOTS        |  FIXC3  | 15017193445 |
+|  MEM_INST_RETIRED_ALL_LOADS |   PMC0  |      467117 |
+| MEM_INST_RETIRED_ALL_STORES |   PMC1  |      170562 |
 +-----------------------------+---------+-------------+
 
 +----------------------+------------+
 |        Metric        | HWThread 0 |
 +----------------------+------------+
-|  Runtime (RDTSC) [s] |     1.5168 |
+|  Runtime (RDTSC) [s] |     1.5151 |
 | Runtime unhalted [s] |     1.2544 |
-|      Clock [MHz]     |  1995.2260 |
+|      Clock [MHz]     |  1995.1566 |
 |          CPI         |     0.8005 |
-|  Load to store ratio |     2.7129 |
+|  Load to store ratio |     2.7387 |
 +----------------------+------------+
 

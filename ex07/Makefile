@@ -33,7 +33,7 @@ raytracer_c_seq:
 
 
 cleanaux: clean
-	@rm -rf *.png *data *.o* *.pnm
+	@rm -rf *.png *data *.o* *.pnm slurmoutfile
 
 clean:
 	@rm -rf exe simdata

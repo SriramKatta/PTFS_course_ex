@@ -18,14 +18,14 @@ imagesize=15000
 
 make raytracer
 
-for ompmode in dynamic auto static 
+for ompmode in dynamic static 
 do
   fname=./simdata/raytra_tilesizevar_$ompmode
   echo "#tilesize performnce(MPX/s)" > $fname
   echo "----------------------------------"
   echo $ompmode
   echo "----------------------------------"
-  for ((tilesize=10; tilesize <= 5000; tilesize+=1))
+  for ((tilesize=1; tilesize <= 5000; tilesize+=1))
   do
     if [ $(echo "$imagesize % $tilesize == 0" | bc) -eq 1 ]
     then
