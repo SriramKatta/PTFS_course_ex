@@ -51,7 +51,7 @@ int main (int argc, char** argv)
 
   // bogus parallel region
   #pragma omp parallel
-  if(omp_get_thread_num()==0) printf("Hello");
+  if(omp_get_thread_num()==0) printf("Hello\n");
 
   S = getTimeStamp();
   #pragma omp parallel for reduction(+:sum)

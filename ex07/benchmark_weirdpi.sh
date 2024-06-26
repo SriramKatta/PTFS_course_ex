@@ -12,7 +12,7 @@ module load intel
 module load likwid
 
 [ ! -d "exe" ] && mkdir -p exe
-[ ! -d "simdata" ] && mkdir -p simdata
+[ ! -d "simdata" ] && mkdir -p simdata/picalc
 
 for varstate in privateactive privatedeactive
 do
@@ -21,8 +21,8 @@ do
   do
     for threads in {1..4}
     do
-      fname=./simdata/sim_${version}_${threads}_${varstate}
-      echo "#PI value performance" >  $fname
+      fname=./simdata/picalc/sim_${version}_${threads}_${varstate}
+      echo -n >  $fname
       echo "version ${version} num threads ${threads}"
       for intrun in {1..10}
       do
@@ -31,5 +31,3 @@ do
     done
   done
 done
-
-gnuplot 6plot.gnu
