@@ -155,7 +155,7 @@ int main(int argc, char **argv)
       fprintf(stderr, "Could not allocate tile memory!\n");
       exit(1);
     }
-#pragma omp for private(xc, i) schedule(runtime) collapse(2) 
+#pragma omp for private(yc, xc, i) collapse(2) schedule(runtime)
     for (yc = 0; yc < xtiles; yc++)
       for (xc = 0; xc < ytiles; xc++)
       {
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
                  (void *)(tile + i * tilesize),
                  tilesize * sizeof(char));
         }
-#pragma atomic
+#pragma omp atomic
         count++;
       }
     free(tile);
