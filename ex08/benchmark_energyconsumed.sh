@@ -35,3 +35,6 @@ do
 done
 
 gnuplot plotjob.sh
+
+module load python 
+python ./srcb/zplotb.py

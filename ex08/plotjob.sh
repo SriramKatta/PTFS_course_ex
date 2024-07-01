@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 set terminal png
-set output "zplot.png"
+set output "zplot_D.png"
 set title "performance vs power[w]"
 set key bottom right
 
