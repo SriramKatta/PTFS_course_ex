@@ -3,12 +3,12 @@
 set terminal png
 set output "zplot_D.png"
 set title "performance vs power[w]"
-set key bottom right
+set key top right
 
 set grid
 set logscale x
-set xlabel "performance"
-set ylabel "Power [w]"
+set xlabel "performance [Gflops/s]"
+set ylabel "Energy [J]"
 
 set xtics rotate by 90 right
 

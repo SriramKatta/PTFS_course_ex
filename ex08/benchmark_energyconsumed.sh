@@ -1,7 +1,7 @@
 #!/bin/bash -l
 #SBATCH --nodes=1 -C hwperf
 #SBATCH -p singlenode
-#SBATCH --time=00:10:00
+#SBATCH --time=00:15:00
 #SBATCH --ntasks-per-node=1
 #SBATCH --job-name=bmweirdpicalc
 #SBATCH --export=NONE
@@ -23,7 +23,7 @@ do
   for threads in {1..36}
   do 
     srun --cpu-freq=${frequency}-${frequency} \
-          likwid-perfctr --stats\
+          likwid-perfctr --stats \
           -C N:0-$((threads - 1)) \
           -g ENERGY \
           -m ./exe/picalcexe \
