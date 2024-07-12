@@ -3,10 +3,9 @@
 #include <omp.h>
 #include <numeric>
 
-#define N 2e9
+#define N 2e7
 
 using Time = std::chrono::high_resolution_clock;
-using mintime = std::nano;
 
 int main(int argc, char const *argv[])
 {
@@ -16,26 +15,24 @@ int main(int argc, char const *argv[])
   int numthreads = 0;
 #pragma omp parallel
   {
+    #if _OPENMP
     numthreads = omp_get_num_threads();
+    #endif
 #pragma omp for
     for (int i = 0; i < 16; ++i)
       hist[i] = 0;
   }
 
   auto start = Time::now();
-#if atomicupdate
-#pragma omp parallel for
-#else
-#pragma omp parallel for reduction(+ : hist)
-#endif
+#pragma omp parallel for private(seed)
   for (long i = 0; i < N; ++i)
   {
-#if atomicupdate
 #pragma omp atomic
-#endif
-    ++hist[rand_r(&seed) & 0xf];
+    hist[rand_r(&seed) & 0xf]++;
   }
   auto end = Time::now();
+
+  //check for proper parallelization
   if (std::accumulate(hist, hist + 16, 0) != N)
   {
     std::cout << "your program failed" << std::endl;
@@ -45,9 +42,9 @@ int main(int argc, char const *argv[])
   {
     std::cout << "hist[" << i << "]=" << hist[i] << std::endl;
   }
-  double calctimesec = std::chrono::duration<double, mintime>(end - start).count() / mintime::den;
-
-  std::cout << numthreads << " " << static_cast<double>(N) / calctimesec << std::endl;
+  double calctimesec = std::chrono::duration<double>(end - start).count();
+  double milloniterpersec = static_cast<double>(N) / (calctimesec * 1e6);
+  std::cout << numthreads << " " << milloniterpersec << std::endl;
 
   return 0;
 }

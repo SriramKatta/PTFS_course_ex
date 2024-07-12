@@ -2,16 +2,16 @@ CXX=icpx
 
 CXXFLAGS=-O3 -xHost -qopenmp
 
-SRCS=./src/histo.cpp
-TARGET=./exe/histoexe
+SRCS1=./src/histo_v1.cpp
+SRCS2=./src/histo_v2.cpp
 
-all : histo_atomic histo_red
+all : histo_atomic histo_red histov2
 
-histo_atomic :
-	$(CXX) $(CXXFLAGS) $(SRCS) -Datomicupdate -o ./exe/histo_atomic
+histo_v1 :
+	$(CXX) $(CXXFLAGS) $(SRCS1) -o ./exe/histo_v1
 
-histo_red :
-	$(CXX) $(CXXFLAGS) $(SRCS) -o ./exe/histo_red
+histo_v2 :
+	$(CXX) $(CXXFLAGS) $(SRCS2) -o ./exe/histo_v2
 
 clean:
 	rm -rf exe simdata* *.png *.o*

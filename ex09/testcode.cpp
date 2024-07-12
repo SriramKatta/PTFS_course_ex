@@ -1,13 +1,17 @@
+#include <iostream>
 #include <omp.h>
-#include <stdio.h>
 
-int main() {
+int main()
+{
     int i;
-
-    #pragma omp parallel for //private(i)
-    for (i = 0; i < 10; i++) {
-        printf("Thread %d: i = %d\n", omp_get_thread_num(), i);
+    long hist[10] = {0};
+    long hist2[5][2] = {0};
+#pragma omp parallel for
+    {
+        for (size_t i = 0; i < 10; i++)
+        {
+            printf("thread id is : %d index is : %zu\n",  omp_get_thread_num(), i);
+        }
     }
-
     return 0;
 }

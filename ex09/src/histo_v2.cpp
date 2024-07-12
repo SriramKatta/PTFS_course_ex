@@ -3,7 +3,7 @@
 #include <omp.h>
 #include <numeric>
 
-#define N 2e3
+#define N 2e9
 
 #define maxcores 18
 #define bins 16
@@ -21,21 +21,20 @@ int main(int argc, char const *argv[])
 #pragma omp parallel
   {
     numthreads = omp_get_num_threads();
-    if(numthreads == 0){
+    if (numthreads == 0)
+    {
       printf("hello");
     }
   }
 
   int tid = 0;
   auto start = Time::now();
-#pragma omp parallel for private(tid)
+  #pragma omp parallel for 
   for (long iter = 0; iter < N; ++iter)
   {
-    tid = omp_get_thread_num();
-    ++hist_temp[tid][rand_r(&seed) & bins];
+    hist_temp[omp_get_thread_num()][rand_r(&seed) & 0xf]++;
   }
   auto end = Time::now();
-  
 
   for (int bin = 0; bin < bins; ++bin)
   {
@@ -44,18 +43,19 @@ int main(int argc, char const *argv[])
       hist[bin] += hist_temp[core][bin];
     }
   }
-  
+
+// check for proper parallelization
   if (std::accumulate(hist, hist + bins, 0) != N)
   {
     std::cout << "your program failed" << std::endl;
-    //std::exit(1);
+    std::exit(1);
   }
-  
+
   for (int bin = 0; bin < 16; ++bin)
   {
     std::cout << "hist[" << bin << "]=" << hist[bin] << std::endl;
   }
-  
+
   double calctimesec = std::chrono::duration<double, mintime>(end - start).count() / mintime::den;
 
   std::cout << numthreads << " " << static_cast<double>(N) / calctimesec << std::endl;

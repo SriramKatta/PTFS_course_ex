@@ -11,4 +11,5 @@ set xlabel "Num Cores"
 set ylabel "Bandwidth (it/s)"
 
 plot './simdata/sim_atomic' title "atomic version" with linespoints, \
-      './simdata/sim_red' title "reduction version" with linespoints
+      './simdata/sim_red' title "reduction version" with linespoints, \
+      './simdata/sim_v2' title "v2 version" with linespoints

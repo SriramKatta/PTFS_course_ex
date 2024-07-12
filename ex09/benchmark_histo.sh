@@ -16,7 +16,7 @@ module load likwid
 
 make
 
-for ver in atomic red
+for ver in v2
 do 
   fname=./simdata/sim_$ver
   echo "#cores it/sec" > $fname
@@ -25,7 +25,7 @@ do
     echo "$ver | $threads of 18 start"
     srun --cpu-freq=2000000-2000000 \
     likwid-pin -q -C M0:0-$((threads - 1)) \
-    ./exe/histo_$ver |tail -n 1 >> $fname
+    ./exe/histo_$ver | tail -n 1 >> $fname
     echo "$ver | $threads of 18 done"
   done
 done
