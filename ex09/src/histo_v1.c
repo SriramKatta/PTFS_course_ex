@@ -1,11 +1,16 @@
-#include <iostream>
-#include <chrono>
+#include <stdio.h>
 #include <omp.h>
 #include <numeric>
+#include <time.h>
 
 #define N 2e7
 
-using Time = std::chrono::high_resolution_clock;
+double getTimeStamp()
+{
+  struct timespec ts;
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+  return (double)ts.tv_sec + (double)ts.tv_nsec * 1.e-9;
+}
 
 int main(int argc, char const *argv[])
 {
@@ -23,14 +28,14 @@ int main(int argc, char const *argv[])
       hist[i] = 0;
   }
 
-  auto start = Time::now();
-#pragma omp parallel for private(seed)
+  double start = getTimeStamp();
+#pragma omp parallel for
   for (long i = 0; i < N; ++i)
   {
 #pragma omp atomic
     hist[rand_r(&seed) & 0xf]++;
   }
-  auto end = Time::now();
+  double end = getTimeStamp();
 
   //check for proper parallelization
   if (std::accumulate(hist, hist + 16, 0) != N)
@@ -42,7 +47,7 @@ int main(int argc, char const *argv[])
   {
     std::cout << "hist[" << i << "]=" << hist[i] << std::endl;
   }
-  double calctimesec = std::chrono::duration<double>(end - start).count();
+  double calctimesec = end - start;
   double milloniterpersec = static_cast<double>(N) / (calctimesec * 1e6);
   std::cout << numthreads << " " << milloniterpersec << std::endl;
 
