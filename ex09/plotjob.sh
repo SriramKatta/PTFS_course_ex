@@ -8,8 +8,7 @@ set key bottom right
 
 set grid
 set xlabel "Num Cores"
-set ylabel "Bandwidth (it/s)"
+set ylabel "million-it/s"
 
-plot './simdata/sim_atomic' title "atomic version" with linespoints, \
-      './simdata/sim_red' title "reduction version" with linespoints, \
+plot './simdata/sim_v1' title "v1 version" with linespoints, \
       './simdata/sim_v2' title "v2 version" with linespoints

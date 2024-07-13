@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <omp.h>
-#include <numeric>
 #include <time.h>
 
-#define N 2e7
+#define N 2e9
+#define MAX_THREADS 18
+#define BINS 16
 
 double getTimeStamp()
 {
@@ -15,7 +16,7 @@ double getTimeStamp()
 int main(int argc, char const *argv[])
 {
   unsigned int seed = 1;
-  long hist[16];
+  long hist[MAX_THREADS][BINS];
   // bogus parallel region
   int numthreads = 0;
 #pragma omp parallel
@@ -23,33 +24,36 @@ int main(int argc, char const *argv[])
     #if _OPENMP
     numthreads = omp_get_num_threads();
     #endif
-#pragma omp for
-    for (int i = 0; i < 16; ++i)
-      hist[i] = 0;
+#pragma omp for collapse(2)
+    for (int thread = 0; thread < MAX_THREADS; ++thread)
+    for (int i = 0; i < BINS; ++i)
+      hist[thread][i] = 0;
   }
 
   double start = getTimeStamp();
 #pragma omp parallel for private(seed)
   for (long i = 0; i < N; ++i)
   {
-#pragma omp atomic
-    hist[rand_r(&seed) & 0xf]++;
+    hist[omp_get_thread_num()][rand_r(&seed) & 0xf]++;
   }
   double end = getTimeStamp();
 
-  //check for proper parallelization
-  if (std::accumulate(hist, hist + 16, 0) != N)
+//check for proper parallelization
+  long res = 0;
+  for (size_t threads = 0; threads < MAX_THREADS; threads++)
+  for (size_t i = 0; i < BINS; i++)
   {
-    std::cout << "your program failed" << std::endl;
-    std::exit(1);
+    res += hist[threads][i];
   }
-  for (int i = 0; i < 16; ++i)
+  
+  if (res != N)
   {
-    std::cout << "hist[" << i << "]=" << hist[i] << std::endl;
+    printf("your program failed\n");
+    return 1;
   }
   double calctimesec = end - start;
-  double milloniterpersec = static_cast<double>(N) / (calctimesec * 1e6);
-  std::cout << numthreads << " " << milloniterpersec << std::endl;
+  double milloniterpersec = (double)(N) / (calctimesec * 1e6);
+  printf("%d %f\n", numthreads, milloniterpersec);
 
   return 0;
 }
