@@ -2,8 +2,8 @@
 
 set terminal png
 set output "perf3b.png"
-set title "it/s vs numcores"
-set key bottom right
+set title "million-it/s vs numcores"
+set key top left
 
 
 set grid
