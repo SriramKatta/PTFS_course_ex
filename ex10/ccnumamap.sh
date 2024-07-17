@@ -24,8 +24,7 @@ do
       echo "version=$version, memnode=$memnode, cpunode=$cpunode"
       bandwidth=$(srun --cpu-freq=2000000-2000000 \
       numactl --membind $memnode \
-      likwid-pin -c M${cpunode}:0-11 \
-      likwid-bench -t daxpy_avx -w N:10MB:12 2>&1 | \
+      likwid-bench -t daxpy$version -w M${cpunode}:5GB 2>&1 | \
       grep MByte/s | awk '{print $2}') ;
       bandwidth=$(echo "scale=2; $bandwidth/1024" | bc -l)
       echo -n $bandwidth, >> $fname
@@ -33,3 +32,4 @@ do
     echo >> $fname
   done
 done
+#likwid-pin -c M${cpunode}:0-12 \
