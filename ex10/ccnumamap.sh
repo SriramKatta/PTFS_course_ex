@@ -1,6 +1,6 @@
 #!/bin/bash -l
 #SBATCH --nodes=1 
-#SBATCH --partition spr1tb
+#SBATCH --partition=spr1tb
 #SBATCH --time=06:00:00
 #SBATCH --ntasks-per-node=1
 #SBATCH --job-name=bmccnuma
@@ -12,7 +12,7 @@ module load likwid
 
 [ ! -d "simdata" ] && mkdir -p simdata
 
-for version in "" "_avx" "_avx" "_avx_fma" "_avx512" "_avx512_fma"
+for version in "_avx512" "_avx512_fma" "" "_avx" "_avx_fma" 
 do
   fname="./simdata/daxpy$version.csv"
   echo "mem\cpu,0,1,2,3,4,5,6,7" > $fname
