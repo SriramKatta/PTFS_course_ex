@@ -1,4 +1,5 @@
-CXX:=nvc++
+CXX:=nvcc
+
 
 SRCS:=benchmark.cu
 TARGET:=benchmark
